@@ -84,6 +84,8 @@ tree.bff2 <- tree(Purchase~Age+Gender+Occupation+City_Category+Stay_In_Current_C
 pr.tree2<-predict(tree.bff2, newdata = bff[-train,],type = "class")
 table(pr.tree2, bff[-train,]$Purchase,dnn = list('predict', 'actual'))
 mean(pr.tree2==bff[-train,]$Purchase)
+
+
 #SVM
 #using consumer behavior
 svm.bff <- svm(Purchase~.-User_ID, data=bff, subset = train,kernel ="linear", cost =0.1,scale =FALSE)
