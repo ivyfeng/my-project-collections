@@ -1,3 +1,4 @@
+### Revenue analysis on Google store dataset
 library(tidyverse)
 library(lubridate)
 library(gridExtra)
