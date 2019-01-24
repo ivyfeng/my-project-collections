@@ -64,8 +64,10 @@ rf2 <-randomForest(Purchase ~ Age+Gender+Occupation+City_Category+Stay_In_Curren
 pr.rf2 <- predict(rf2, newdata = bff[-train,])
 table(pr.rf2, bff[-train,]$Purchase, dnn = list('predict', 'actual'))
 mean(pr.rf2 == bff[-train,]$Purchase)
-#decision tree
-#using consumer behavior
+
+
+#Decision tree
+#using consumer behavior factors
 tree.bff <- tree(Purchase~.-User_ID, data=bff, subset = train)
 pr.tree<-predict(tree.bff, newdata = bff[-train,],type = "class")
 table(pr.tree, bff[-train,]$Purchase)
