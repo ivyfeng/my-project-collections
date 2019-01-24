@@ -59,7 +59,7 @@ summary(mod1)
 mod2<-aov(transactionRevenue~day,data=data.sub)
 summary(mod2)
 
-#Logistic
+#Logistic regression
 n.data<-sample_frac(data.sub[which(data.sub$fullVisitorId!=b.data$fullVisitorId),],0.015)
 l.data<-rbind(n.data,b.data)
 l.data$month<-as.numeric(l.data$month)
