@@ -18,6 +18,8 @@ for (i in 1:18){
                                         ifelse(blackfriday$Product_Category_3 == i, 1, 0)))
 }
 
+
+## replace Na value with 0 in dataset
 blackfriday[is.na(blackfriday)] <- 0
 
 names(blackfriday)[13:30] <- c("c1","c2","c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11",
@@ -50,6 +52,8 @@ for (i in 1:length(ntree_to_test)){
   result <- mean(pr.bff == bff[-train,]$Purchase)
   result_rf[i] <- result
 }
+
+
 #using consumer behavior
 rf <-randomForest(Purchase ~ .-User_ID,data = bff, subset = train, 
                   ntree = ntree_to_test[which.max(result_rf)],importance = TRUE)
@@ -79,7 +83,8 @@ prune.t <- prune.misclass(tree.bff,best = 10)
 pr.prune <- predict(prune.t, newdata = bff[-train,],type = "class")
 mean(pr.prune == bff[-train,]$Purchase)
 table(pr.tree, bff[-train,]$Purchase,dnn = list('predict', 'actual'))
-#using only basic information
+
+#using only basic information to fit the model
 tree.bff2 <- tree(Purchase~Age+Gender+Occupation+City_Category+Stay_In_Current_City_Years+Marital_Status, data=bff, subset = train)
 pr.tree2<-predict(tree.bff2, newdata = bff[-train,],type = "class")
 table(pr.tree2, bff[-train,]$Purchase,dnn = list('predict', 'actual'))
